@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Header from './Header'
+import Button from './common/Button'
+import useButton from '../hooks/useButton'
 import './Dashboard.css'
 
 interface ServerInfo {
@@ -13,8 +14,6 @@ interface ServerInfo {
 }
 
 const Dashboard = () => {
-  const { username, logout } = useAuth()
-  const navigate = useNavigate()
   const [servers, setServers] = useState<ServerInfo[]>([])
   const [selectedServer, setSelectedServer] = useState<ServerInfo | null>(null)
   const [loading, setLoading] = useState(true)
@@ -39,11 +38,6 @@ const Dashboard = () => {
     }
   }
 
-  const handleLogout = async () => {
-    await logout()
-    navigate('/login')
-  }
-
   const handleServerClick = async (serverId: number) => {
     try {
       const response = await axios.get(`/api/servers/${serverId}`, {
@@ -58,6 +52,8 @@ const Dashboard = () => {
   const closeModal = () => {
     setSelectedServer(null)
   }
+
+  const closeButton = useButton(closeModal)
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -92,15 +88,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h1>서버 모니터링 대시보드</h1>
-        <div className="user-info">
-          <span>안녕하세요, <strong>{username}</strong>님!</span>
-          <button onClick={handleLogout} className="logout-button">
-            로그아웃
-          </button>
-        </div>
-      </div>
+      <Header />
       
       <div className="dashboard-content">
         {loading ? (
@@ -156,7 +144,7 @@ const Dashboard = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{selectedServer.serverName} 상세 정보</h2>
-              <button className="close-button" onClick={closeModal}>×</button>
+              <Button className="close-button" {...closeButton}>×</Button>
             </div>
             <div className="modal-body">
               <div className="info-section">

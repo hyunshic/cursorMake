@@ -1,0 +1,38 @@
+.work-container {
+  width: 1600px;
+  height: 900px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-content {
+  flex: 1;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.work-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+}
+
+.work-placeholder h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.work-placeholder p {
+  margin: 0;
+  font-size: 16px;
+}

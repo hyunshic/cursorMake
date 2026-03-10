@@ -1,0 +1,12 @@
+.app-button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  background: transparent;
+  padding: 0;
+}
+
+.app-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

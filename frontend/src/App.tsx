@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
+import TransmissionStats from './components/TransmissionStats'
+import WorkManagement from './components/WorkManagement'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
@@ -16,6 +18,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/stats"
+            element={
+              <ProtectedRoute>
+                <TransmissionStats />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/work"
+            element={
+              <ProtectedRoute>
+                <WorkManagement />
               </ProtectedRoute>
             }
           />

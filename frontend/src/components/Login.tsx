@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Button from './common/Button'
+import useButton from '../hooks/useButton'
 import './Login.css'
 
 const Login = () => {
@@ -48,6 +50,11 @@ const Login = () => {
     }
   }
 
+  const toggleButton = useButton(() => {
+    setIsLogin(!isLogin)
+    setError('')
+  })
+
   return (
     <div className="login-container">
       <div className="login-box">
@@ -80,25 +87,18 @@ const Login = () => {
 
           {error && <div className="error-message">{error}</div>}
 
-          <button type="submit" disabled={loading} className="submit-button">
+          <Button type="submit" disabled={loading} className="submit-button">
             {loading ? '처리 중...' : isLogin ? '로그인' : '회원가입'}
-          </button>
+          </Button>
         </form>
 
         <div className="toggle-form">
           <span>
             {isLogin ? '계정이 없으신가요? ' : '이미 계정이 있으신가요? '}
           </span>
-          <button
-            type="button"
-            onClick={() => {
-              setIsLogin(!isLogin)
-              setError('')
-            }}
-            className="toggle-button"
-          >
+          <Button className="toggle-button" {...toggleButton}>
             {isLogin ? '회원가입' : '로그인'}
-          </button>
+          </Button>
         </div>
       </div>
     </div>
